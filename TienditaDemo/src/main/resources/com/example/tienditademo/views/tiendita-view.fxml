@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tienditademo.controllers.PrincipalViewController">
+<VBox prefHeight="400.0" prefWidth="600.0" spacing="10" style="-fx-font-family: 'Tahoma'; -fx-font-size: 14px;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tienditademo.controllers.PrincipalViewController">
     <padding>
         <Insets bottom="15" left="15" right="15" top="15" />
     </padding>
 
-    <Label text="Inventario de Productos" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+    <Label text="Inventario de Productos" style="-fx-font-family: 'Verdana'; -fx-font-size: 18px;" />
 
-    <TextField promptText="Buscar producto" />
+    <TextField fx:id="txtBuscar" promptText="Buscar producto" />
 
     <TableView fx:id="tablaProductos" VBox.vgrow="ALWAYS">
         <columns>
@@ -29,8 +29,8 @@
     </TableView>
 
     <HBox spacing="10" alignment="CENTER_RIGHT">
-        <Button onAction="#agregar" text="Agregar" />
-        <Button onAction="#actualizar" text="Actualizar" />
-        <Button onAction="#eliminar" text="Eliminar" />
+        <Button onAction="#agregar" text="Agregar" style="-fx-font-family: 'Verdana';" />
+        <Button onAction="#actualizar" text="Actualizar" style="-fx-font-family: 'Verdana';" />
+        <Button onAction="#eliminar" text="Eliminar" style="-fx-font-family: 'Verdana';" />
     </HBox>
 </VBox>

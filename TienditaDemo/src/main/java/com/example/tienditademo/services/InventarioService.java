@@ -53,4 +53,36 @@ public class InventarioService {
         }
         repo.sobrescribirArchivo(lista);
     }
+    public Producto buscarProductoID(String id) throws IOException{
+        if(id==null || id.isBlank()){
+            throw new IllegalArgumentException("Ingresa un ID para buscar");
+        }
+        List<Producto> lista = repo.cargarTodos();
+        for (Producto p : lista){
+            if(p.getId().equals(id.trim())){
+                return p;
+            }
+        }
+        throw new IllegalArgumentException("No se encontró ningun producto con el ID: " + id);
+    }
+    public void actualizarProducto(String idViejo, String nombre, Double precio, Integer stock, String categoria) throws IOException{
+        if(idViejo==null || idViejo.isBlank()){
+            throw new IllegalArgumentException("El ID es obligatorio para actualizar");
+        }
+
+        List<Producto> lista = repo.cargarTodos();
+        boolean actualizado = false;
+        for(int i=0; i< lista.size(); i++){
+            if (lista.get(i).getId().equals(idViejo.trim())){
+                Producto productoActualizado = new Producto(idViejo.trim(), nombre, precio, stock, categoria);
+                lista.set(i, productoActualizado);
+                actualizado = true;
+                break;
+            }
+        }
+        if(!actualizado){
+            throw new IllegalArgumentException("Hubo un error al actualizar");
+        }
+        repo.sobrescribirArchivo(lista);
+    }
 }
