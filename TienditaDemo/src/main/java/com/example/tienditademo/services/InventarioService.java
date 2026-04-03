@@ -42,4 +42,15 @@ public class InventarioService {
             throw new IllegalArgumentException("El stock debe ser un número entero");
         }
     }
+    public void eliminarProducto(String id) throws IOException{
+        if( id==null || id.isBlank()){
+            throw new IllegalArgumentException("Ingresa el ID del producto a eliminar");
+        }
+        List<Producto> lista = repo.cargarTodos();
+        boolean cBorro = lista.removeIf(p -> p.getId().equals(id.trim()));
+        if(!cBorro){
+            throw new IllegalArgumentException("No se encontró ningun producto con el ID: " + id);
+        }
+        repo.sobrescribirArchivo(lista);
+    }
 }

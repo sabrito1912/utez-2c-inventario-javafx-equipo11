@@ -55,7 +55,7 @@ public class PrincipalViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/agregar-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         Stage stage = new Stage();
-        stage.setTitle("Hello!");
+        stage.setTitle("Agregar");
         stage.setScene(scene);
         stage.show();
 
@@ -66,7 +66,7 @@ public class PrincipalViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/buscar-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         Stage stage = new Stage();
-        stage.setTitle("Hello!");
+        stage.setTitle("Buscar");
         stage.setScene(scene);
         stage.show();
     }
@@ -75,7 +75,7 @@ public class PrincipalViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/actualizar-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         Stage stage = new Stage();
-        stage.setTitle("Hello!");
+        stage.setTitle("Actualizar");
         stage.setScene(scene);
         stage.show();
     }
@@ -88,7 +88,7 @@ public class PrincipalViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/eliminar-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         Stage stage = new Stage();
-        stage.setTitle("Hello!");
+        stage.setTitle("Eliminar");
         stage.setScene(scene);
         stage.show();
     }
