@@ -28,6 +28,14 @@ public class AgregarController {
         try {
             String id = txtId.getText();
             String nombre = txtNombre.getText();
+            if (nombre.matches(".*\\d.*")) {
+                Alert alerta = new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("Error de Validación");
+                alerta.setHeaderText(null);
+                alerta.setContentText("El nombre del producto no puede contener números.");
+                alerta.showAndWait();
+                return;
+            }
             String precio = txtPrecio.getText();
             String stock = txtStock.getText();
             String categoria = txtCategoria.getText();
@@ -36,9 +44,9 @@ public class AgregarController {
             mostrarAlerta(Alert.AlertType.INFORMATION, "Producto agregado exitosamente");
             cerrarVentana(event);
         }catch (IllegalArgumentException e){
-            mostrarAlerta(Alert.AlertType.WARNING, "Error de datos" + e.getMessage());
+            mostrarAlerta(Alert.AlertType.WARNING, "Error de datos: " + e.getMessage());
         }catch (IOException e){
-            mostrarAlerta(Alert.AlertType.ERROR, "Error al guardar" + e.getMessage());
+            mostrarAlerta(Alert.AlertType.ERROR, "Error al guardar: " + e.getMessage());
         }
     }
 

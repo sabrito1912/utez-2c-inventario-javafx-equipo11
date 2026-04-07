@@ -21,9 +21,9 @@ public class EliminarController {
             mostrarAlerta(Alert.AlertType.INFORMATION, "Registro eliminado correctamente");
             cerrarVentana(event);
         }catch (IllegalArgumentException e){
-            mostrarAlerta(Alert.AlertType.WARNING, "Aviso" + e.getMessage());
+            mostrarAlerta(Alert.AlertType.WARNING, "Aviso: " + e.getMessage());
         }catch(IOException e){
-            mostrarAlerta(Alert.AlertType.ERROR, "Hubo un Error:" + e.getMessage());
+            mostrarAlerta(Alert.AlertType.ERROR, "Hubo un Error: " + e.getMessage());
         }
     }
 

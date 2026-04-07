@@ -44,16 +44,24 @@ public class ActualizarController {
         try {
             String id = txtId.getText();
             String nombre = txtNombre.getText();
+            if (nombre.matches(".*\\d.*")) { //El regex quiere decir que si en el nombre hay un dígito escondido en cualquier lugar, devuelve verdadero
+                Alert alerta = new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("Error de Validación");
+                alerta.setHeaderText(null);
+                alerta.setContentText("El nombre del producto no puede contener números. Por favor corrígelo.");
+                alerta.showAndWait();
+                return; // Detiene la actualización
+            }
             Double precio = Double.parseDouble(txtPrecio.getText());
             Integer stock = Integer.parseInt(txtStock.getText());
             String categoria = txtCategoria.getText();
 
             service.actualizarProducto(id, nombre, precio, stock, categoria);
-            mostrarAlerta(Alert.AlertType.INFORMATION, "Registro actualizado correctamente");
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Registro actualizado correctamente.");
 
             cerrarVentana(event);
         }catch (NumberFormatException e){
-            mostrarAlerta(Alert.AlertType.WARNING, "Error: El precio y stock deben ser números validos");
+            mostrarAlerta(Alert.AlertType.WARNING, "Error: El precio y stock deben ser números validos.  ");
         } catch (IllegalArgumentException e){
             mostrarAlerta(Alert.AlertType.WARNING, "Error al actualizar: " + e.getMessage());
         }catch (IOException e){
