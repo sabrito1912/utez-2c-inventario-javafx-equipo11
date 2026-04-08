@@ -1,4 +1,7 @@
 package com.example.tienditademo.models;
+//Esta clase es instanciada (se crean objetos de ella) en el Repository
+//cuando lee el archivo y en los Controllers cuando el usuario llena un formulario.
+//Viaja a traves del Service como mensajero de datos.
 
 public class Producto {
     private String id;
@@ -7,6 +10,8 @@ public class Producto {
     private int stock;
     private String categoria;
 
+    // Es el metodo que se usa para crear un nuevo producto
+    // Cuando otra clase quiere crear un producto, debe entregarle estos 5 datos.
     public Producto(String id, String nombre, double precio, int stock, String categoria) {
         this.id = id;
         this.nombre = nombre;
@@ -27,31 +32,16 @@ public class Producto {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public double getPrecio() {
         return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
     }
 
     public int getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
     public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
 }

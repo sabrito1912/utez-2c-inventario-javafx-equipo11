@@ -15,13 +15,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
+import javafx.stage.Modality; // Controlla el comportamiento de las ventanas flotantes
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class PrincipalViewController {
     private InventarioService service = new InventarioService();
+    // Lista que la tabla puede ver, aparecen en pantalla si se agregan aquí
     private ObservableList<Producto> listaObservable = FXCollections.observableArrayList();
     @FXML
     private TableView<Producto> tablaProductos;
@@ -45,7 +46,7 @@ public class PrincipalViewController {
         colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
         colStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
-        cargarTabla();
+        cargarTabla(); // Llama al metodo y llena la tabla
 
         FilteredList<Producto> datosFiltrados = new FilteredList<>(listaObservable, b -> true);
 
@@ -64,6 +65,7 @@ public class PrincipalViewController {
         tablaProductos.setItems(datosOrdenados);
     }
 
+    // Le pide los productos al services y los mete a la tabla
     public void cargarTabla(){
         try{
             listaObservable.clear();
@@ -72,18 +74,21 @@ public class PrincipalViewController {
             System.out.println("No se pudo cargar el inventario: " + e.getMessage());
         }
     }
+
+    // Se activa al dar clic en el botón con el mismo nombre
     public void agregar(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/agregar-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setTitle("Agregar Producto");
         stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.APPLICATION_MODAL); // Bloquea la ventana principal hasta que cierres esta ventana
         stage.showAndWait();
         cargarTabla();
 
     }
 
+    // Lo mismo que agregar pero para actualizar
     public void actualizar(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/actualizar-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -92,9 +97,11 @@ public class PrincipalViewController {
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
+        // Cuando se cierra la ventana recarga la tabla para ver si hay datos nuevos
         cargarTabla();
     }
 
+    // Lo mismo que agregar pero para eliminar
     public void eliminar(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/eliminar-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());

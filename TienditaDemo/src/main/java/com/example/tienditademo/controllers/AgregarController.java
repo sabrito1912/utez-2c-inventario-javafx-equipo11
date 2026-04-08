@@ -3,13 +3,14 @@ package com.example.tienditademo.controllers;
 import com.example.tienditademo.services.InventarioService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.scene.Node; // Representa cualquier boton o texto en la pantalla
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.stage.Stage;  // Representa la ventana del sistema operativo
 import java.io.IOException;
 
 public class AgregarController {
+    //"Invocaciones" de la vista
     @FXML
     private TextField txtId;
     @FXML
@@ -20,14 +21,16 @@ public class AgregarController {
     private TextField txtStock;
     @FXML
     private TextField txtCategoria;
-
+    // Crea su instancia de Service para mandarle los datos guardados
     private InventarioService service = new InventarioService();
 
     @FXML
     public void agregar(ActionEvent event){
         try {
+            // Lee los textos de todos los campos
             String id = txtId.getText();
             String nombre = txtNombre.getText();
+            // Regex revisa que no haya números en el nombre desde la interfaz
             if (nombre.matches(".*\\d.*")) {
                 Alert alerta = new Alert(Alert.AlertType.ERROR);
                 alerta.setTitle("Error de Validación");
@@ -39,7 +42,7 @@ public class AgregarController {
             String precio = txtPrecio.getText();
             String stock = txtStock.getText();
             String categoria = txtCategoria.getText();
-
+            // Manda todos los textos a service para que los revise y guarde
             service.agregarProducto(id, nombre, precio, stock, categoria);
             mostrarAlerta(Alert.AlertType.INFORMATION, "Producto agregado exitosamente");
             cerrarVentana(event);
@@ -54,6 +57,8 @@ public class AgregarController {
     public void  cancelar(ActionEvent event){
         cerrarVentana(event);
     }
+
+    // Misma logica de alertas que en el controlador de eliminar
     private void mostrarAlerta(Alert.AlertType type, String mensaje){
         Alert alerta = new Alert(type);
         alerta.setHeaderText(null);
