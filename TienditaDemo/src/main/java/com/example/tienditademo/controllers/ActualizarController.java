@@ -58,11 +58,19 @@ public class ActualizarController {
                 alerta.showAndWait();
                 return; // Detiene la actualización
             }
+
             // Convierte texto a número manualmente antes de enviarlo a Service
             Double precio = Double.parseDouble(txtPrecio.getText());
+            if (precio <= 0) {
+                mostrarAlerta(Alert.AlertType.ERROR, "El precio no puede ser cero o menor a 0.");
+                return;
+            }
             Integer stock = Integer.parseInt(txtStock.getText());
             String categoria = txtCategoria.getText();
-
+            if (categoria.matches(".*\\d.*")) {
+                mostrarAlerta(Alert.AlertType.ERROR, "La categoría no puede contener números.");
+                return;
+            }
             // Manda todos los datos completos a la lógica para reemplazar
             service.actualizarProducto(id, nombre, precio, stock, categoria);
             mostrarAlerta(Alert.AlertType.INFORMATION, "Registro actualizado correctamente.");

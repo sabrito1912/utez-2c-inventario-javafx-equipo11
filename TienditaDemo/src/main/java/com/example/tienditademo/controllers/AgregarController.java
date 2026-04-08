@@ -40,8 +40,22 @@ public class AgregarController {
                 return;
             }
             String precio = txtPrecio.getText();
+            try {
+                double precioNum = Double.parseDouble(precio);
+                if (precioNum <= 0) {
+                    mostrarAlerta(Alert.AlertType.ERROR, "El precio no puede ser cero o menor a 0");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Por favor ingresa un precio numérico válido");
+                return;
+            }
             String stock = txtStock.getText();
             String categoria = txtCategoria.getText();
+            if (categoria.matches(".*\\d.*")) {
+                mostrarAlerta(Alert.AlertType.ERROR, "La categoría no puede contener números.");
+                return;
+            }
             // Manda todos los textos a service para que los revise y guarde
             service.agregarProducto(id, nombre, precio, stock, categoria);
             mostrarAlerta(Alert.AlertType.INFORMATION, "Producto agregado exitosamente");
